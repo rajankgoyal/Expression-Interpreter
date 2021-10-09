@@ -11,6 +11,7 @@ using namespace std;
 #include "equals.h"
 #include "greater.h"
 #include "less.h"
+#include "and.h"
 
 SubExpression::SubExpression(Expression* left, Expression* right)
 {
@@ -44,6 +45,9 @@ Expression* SubExpression::parse()
             return new Greater(left, right);
         case '<':
             return new Less(left, right);
+        case '&':
+            return new And(left, right);
+
     }
     return 0;
 }
