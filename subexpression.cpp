@@ -8,6 +8,7 @@ using namespace std;
 #include "minus.h"
 #include "times.h"
 #include "divide.h"
+#include "equals.h"
 
 SubExpression::SubExpression(Expression* left, Expression* right)
 {
@@ -35,6 +36,8 @@ Expression* SubExpression::parse()
             return new Times(left, right);
         case '/':
             return new Divide(left, right);
+        case '=':
+            return new Equals(left, right);
     }
     return 0;
 }
