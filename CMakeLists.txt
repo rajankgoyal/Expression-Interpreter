@@ -11,6 +11,6 @@ add_executable(hw330
         literal.h
         parse.cpp parse.h
         plus.h minus.h times.h divide.h
-        equals.h greater.h
+        equals.h greater.h less.h
         module3.cpp
         symboltable.cpp symboltable.h)

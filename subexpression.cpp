@@ -10,6 +10,7 @@ using namespace std;
 #include "divide.h"
 #include "equals.h"
 #include "greater.h"
+#include "less.h"
 
 SubExpression::SubExpression(Expression* left, Expression* right)
 {
@@ -41,6 +42,8 @@ Expression* SubExpression::parse()
             return new Equals(left, right);
         case '>':
             return new Greater(left, right);
+        case '<':
+            return new Less(left, right);
     }
     return 0;
 }
