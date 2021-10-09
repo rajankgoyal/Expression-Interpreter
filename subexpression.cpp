@@ -12,6 +12,7 @@ using namespace std;
 #include "greater.h"
 #include "less.h"
 #include "and.h"
+#include "or.h"
 
 SubExpression::SubExpression(Expression* left, Expression* right)
 {
@@ -47,7 +48,8 @@ Expression* SubExpression::parse()
             return new Less(left, right);
         case '&':
             return new And(left, right);
-
+        case '|':
+            return new Or(left, right);
     }
     return 0;
 }
