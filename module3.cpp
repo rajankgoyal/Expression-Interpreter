@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <sstream>
+
 using namespace std;
 
 #include "expression.h"
@@ -17,13 +20,21 @@ int main()
 
     Expression* expression;
     char paren, comma;
-    while (true){
-        cout << "Enter expression: ";
+    ifstream file("../expressions.txt");
+    string statement;
+    while (getline(file, statement)){
+        // injects file statement into the cin buffer
+        istringstream oss(statement);
+        cin.rdbuf(oss.rdbuf());
+        // Prints the statement from the file
+        cout << statement;
+        // reads in the statement and breaks it down to be evaluated
         cin >> paren;
         expression = SubExpression::parse();
         cin >> comma;
         parseAssignments();
-        cout << "Value = " << expression->evaluate() << endl;
+        cout << " Value = " << expression->evaluate() << endl;
+        // Clears the Symbol table for next statement evaluation
         symbolTable.clear();
     }
     return 0;
