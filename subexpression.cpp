@@ -15,17 +15,18 @@ using namespace std;
 #include "or.h"
 #include "negate.h"
 #include "conditional.h"
-
+// For Negate only
 SubExpression::SubExpression(Expression* left)
 {
     this->left = left;
 }
+// For most functions
 SubExpression::SubExpression(Expression* left, Expression* right)
 {
     this->left = left;
     this->right = right;
 }
-
+// For Conditional only
 SubExpression::SubExpression(Expression *left, Expression *right, Expression *condition) {
     this->left = left;
     this->right = right;
@@ -41,17 +42,18 @@ Expression* SubExpression::parse()
 
     left = Operand::parse();
     cin >> operation;
+    // For Negate
     if (operation == '!'){
         cin >> paren;
         return new Negate(left);
-    }
+    }// For conditional
     else if(operation == ':'){
         right = Operand::parse();
         cin >> paren;
         condition = Operand::parse();
         cin >> paren;
         return new Conditional(left, right, condition);
-    }
+    }// For all the functions below in Switch statements
     else{
         right = Operand::parse();
         cin >> paren;
