@@ -13,6 +13,6 @@ add_executable(hw330
         plus.h minus.h times.h divide.h
         equals.h greater.h less.h
         and.h or.h
-        negate.h
+        negate.h conditional.h
         module3.cpp
         symboltable.cpp symboltable.h)

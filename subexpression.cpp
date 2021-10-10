@@ -14,21 +14,29 @@ using namespace std;
 #include "and.h"
 #include "or.h"
 #include "negate.h"
+#include "conditional.h"
 
+SubExpression::SubExpression(Expression* left)
+{
+    this->left = left;
+}
 SubExpression::SubExpression(Expression* left, Expression* right)
 {
     this->left = left;
     this->right = right;
 }
-SubExpression::SubExpression(Expression* left)
-{
+
+SubExpression::SubExpression(Expression *left, Expression *right, Expression *condition) {
     this->left = left;
+    this->right = right;
+    this->condition = condition;
 }
 
 Expression* SubExpression::parse()
 {
     Expression* left;
     Expression* right;
+    Expression* condition;
     char operation, paren;
 
     left = Operand::parse();
@@ -36,6 +44,13 @@ Expression* SubExpression::parse()
     if (operation == '!'){
         cin >> paren;
         return new Negate(left);
+    }
+    else if(operation == ':'){
+        right = Operand::parse();
+        cin >> paren;
+        condition = Operand::parse();
+        cin >> paren;
+        return new Conditional(left, right, condition);
     }
     else{
         right = Operand::parse();
