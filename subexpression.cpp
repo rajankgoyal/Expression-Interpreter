@@ -13,11 +13,16 @@ using namespace std;
 #include "less.h"
 #include "and.h"
 #include "or.h"
+#include "negate.h"
 
 SubExpression::SubExpression(Expression* left, Expression* right)
 {
     this->left = left;
     this->right = right;
+}
+SubExpression::SubExpression(Expression* left)
+{
+    this->left = left;
 }
 
 Expression* SubExpression::parse()
@@ -28,8 +33,15 @@ Expression* SubExpression::parse()
 
     left = Operand::parse();
     cin >> operation;
-    right = Operand::parse();
-    cin >> paren;
+    if (operation == '!'){
+        cin >> paren;
+        return new Negate(left);
+    }
+    else{
+        right = Operand::parse();
+        cin >> paren;
+    }
+
     switch (operation)
     {
         case '+':
