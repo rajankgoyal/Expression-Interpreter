@@ -14,14 +14,18 @@ void parseAssignments();
 
 int main()
 {
+
     Expression* expression;
     char paren, comma;
-    cout << "Enter expression: ";
-    cin >> paren;
-    expression = SubExpression::parse();
-    cin >> comma;
-    parseAssignments();
-    cout << "Value = " << expression->evaluate() << endl;
+    while (true){
+        cout << "Enter expression: ";
+        cin >> paren;
+        expression = SubExpression::parse();
+        cin >> comma;
+        parseAssignments();
+        cout << "Value = " << expression->evaluate() << endl;
+        symbolTable.clear();
+    }
     return 0;
 }
 
